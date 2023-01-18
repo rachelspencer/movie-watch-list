@@ -1,7 +1,9 @@
+import MovieCard from "./MovieCard";
+
 const MovieScreen = ({list, page, setPage, movieList}) => {
 
     const movieDisplay = movieList.map((movie) => {
-        return <h2>{movie.original_title}</h2>
+        return <MovieCard movie={movie} />
     });
 
     return (
