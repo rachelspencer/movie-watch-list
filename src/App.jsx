@@ -2,12 +2,13 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Header from './components/Header';
 import MovieScreen from './components/MovieScreen';
+import Watchlist from './WatchList';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 const App = () => {
     const [ movieList, setMovieList ] = useState([]);
-    const [ watchList, setWatchList ] = useState([]);
+    const [ list, setList ] = useState([]);
     const [ page, setPage ] = useState(1);
 
     const getData = async () => {
@@ -24,11 +25,16 @@ const App = () => {
         getData();
     }, [page]);
 
+    const addMovie = (movie) => {
+        setList([...list, movie]);
+    };
+
     return (
         <div>
             <Header />
             <main>
-                <MovieScreen page={page} setPage={setPage} movieList={movieList} />
+                <MovieScreen  addMovie={addMovie} page={page} setPage={setPage} movieList={movieList} list={list}/>
+                <Watchlist list={list}/>
             </main>
             
         </div>
